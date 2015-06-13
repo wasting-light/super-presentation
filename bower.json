@@ -1,0 +1,24 @@
+{
+  "name": "super-presentation",
+  "version": "0.1.0",
+  "authors": [
+    "Guilherme Rv Coelho <guilhermervcoelho@gmail.com>"
+  ],
+  "description": "A polymer slide presentation element",
+  "main": "app/index.html",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "slide",
+    "presentation"
+  ],
+  "license": "MIT",
+  "homepage": "http://grcoelho.github.io/super-presentation",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

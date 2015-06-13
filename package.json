@@ -1,0 +1,21 @@
+{
+  "name": "super-presentation",
+  "version": "0.1.0",
+  "description": "A polymer slide presentation element",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "web-components",
+    "polymer",
+    "slide",
+    "presentation"
+  ],
+  "author": "Guilherme Rv Coelho <guilhermervcoelho@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.7.10",
+    "gulp": "^3.9.0"
+  }
+}
