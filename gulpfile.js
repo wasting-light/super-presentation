@@ -17,7 +17,7 @@ gulp.task('default', ['server', 'watch']);
  */
 
 gulp.task('watch', function() {
-  gulp.watch('app/**/*.html', ['reload']);
+  gulp.watch('./**/*.html', ['reload']);
 });
 
 /**
@@ -27,7 +27,8 @@ gulp.task('watch', function() {
 gulp.task('server', function() {
   browser({
     server: {
-      baseDir: './app'
+      baseDir: '.',
+      index: 'demo.html'
     },
 
     port: 4000
