@@ -1,0 +1,86 @@
+<link rel="import" href="components/polymer/polymer.html">
+<link rel="import" href="components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="components/iron-pages/iron-pages.html">
+<link rel="import" href="components/iron-a11y-keys/iron-a11y-keys.html">
+<link rel="import" href="components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
+
+<dom-module id="super-presentation">
+  <style>
+    :host {
+      @apply(--layout-fit);
+    }
+  </style>
+
+  <template>
+    <iron-pages id="pages" selected$="{{current}}">
+      <content></content>
+    </iron-pages>
+
+    <button type="button" name="button" on-click="selectPrev">Prev</button>
+    <button type="button" name="button" on-click="selectNext">Next</button>
+
+    <iron-a11y-keys
+        keys="* enter right"
+        target="[[keysTarget]]"
+        on-keys-pressed="selectNext">
+    </iron-a11y-keys>
+
+    <iron-a11y-keys
+        keys="* left"
+        target="[[keysTarget]]"
+        on-keys-pressed="selectPrev">
+    </iron-a11y-keys>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    /**
+     * Element prototype
+     */
+    is: 'super-presentation',
+
+    /**
+     * Element behaviors
+     */
+    behaviors: [
+      Polymer.IronA11yKeysBehavior
+    ],
+
+    /**
+     * Element properties
+     */
+    properties: {
+      current: {
+        type: Number,
+        value: 0
+      },
+
+      keysTarget: {
+        type: Object,
+        value: function() {
+          return document.body;
+        }
+      }
+    },
+
+    /**
+     * Select the next slide
+     */
+    selectNext: function() {
+      var pages = document.querySelector('#pages');
+      pages.selectNext();
+    },
+
+    /**
+     * Select the prev slide
+     */
+    selectPrev: function() {
+      var pages = document.querySelector('#pages');
+      pages.selectPrevious();
+    },
+
+    ready: function() {
+    }
+  });
+</script>
