@@ -1,0 +1,29 @@
+<link rel="import" href="components/polymer/polymer.html">
+<link rel="import" href="components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="super-slide">
+  <style>
+    :host {
+      @apply(--layout-fit);
+      @apply(--layout-vertical);
+      @apply(--layout-center-center);
+      background: white;
+    }
+
+  </style>
+
+  <template>
+    <content select="[title]"></content>
+    <content></content>
+    <span>{{slideBackground}}</span>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'super-slide',
+
+    properties: {
+    }
+  });
+</script>
