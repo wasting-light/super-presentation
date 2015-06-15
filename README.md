@@ -2,6 +2,10 @@
 
 A polymer slide presentation element.
 
+## Demo
+
+> [Check it live](http://grvcoelho.github.io/super-presentation).
+
 ## Install
 
 Install the component using [Bower](http://bower.io/):
