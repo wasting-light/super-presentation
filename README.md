@@ -48,6 +48,13 @@ In order to run it locally you'll need to fetch some dependencies and a basic se
     ```sh
     $ gulp server
     ```
+    
+## TODO
+
+- [ ] Add mobile gestures
+- [ ] Add url tracking
+- [ ] Add option to load topics one by one
+- [ ] Improve element API
 
 ## Contributing
 
