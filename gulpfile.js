@@ -29,6 +29,7 @@ gulp.task('deploy', function() {
   var files = [
     'components',
     'demo',
+    'favicon.png'
     'super-presentation.html',
     'super-slide.html'
   ];
