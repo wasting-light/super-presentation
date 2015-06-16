@@ -22,24 +22,6 @@ gulp.task('watch', function() {
 });
 
 /**
- * Deploy task
- */
-
-gulp.task('deploy', function() {
-  var files = [
-    'components',
-    'demo',
-    'favicon.png'
-    'super-presentation.html',
-    'super-slide.html'
-  ];
-
-  return gulp
-    .src()
-    .pipe(ghPages());
-});
-
-/**
  * Server task
  */
 
@@ -47,7 +29,7 @@ gulp.task('server', function() {
   browser({
     server: {
       baseDir: '.',
-      index: 'demo.html'
+      index: 'demo/index.html'
     },
 
     port: 4000
