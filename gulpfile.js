@@ -4,6 +4,7 @@
 
 var gulp    = require('gulp');
 var browser = require('browser-sync');
+var ghPages = require('gulp-gh-pages');
 var reload  = require('browser-sync').reload;
 
 /**
@@ -18,6 +19,23 @@ gulp.task('default', ['server', 'watch']);
 
 gulp.task('watch', function() {
   gulp.watch('./**/*.html', ['reload']);
+});
+
+/**
+ * Deploy task
+ */
+
+gulp.task('deploy', function() {
+  var files = [
+    'components',
+    'demo',
+    'super-presentation.html',
+    'super-slide.html'
+  ];
+
+  return gulp
+    .src()
+    .pipe(ghPages());
 });
 
 /**
