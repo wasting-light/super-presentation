@@ -21,9 +21,38 @@
 
 <script>
   Polymer({
+    /**
+     * Element prototype
+     */
     is: 'super-slide',
 
+    /**
+     * Element property
+     */
     properties: {
+      background: {
+        type: String,
+        value: ''
+      },
+
+      color: {
+        type: String,
+        value: ''
+      }
+    },
+
+    _applyStyles: function() {
+      if(this.background) {
+        this.style.background = this.background;
+      }
+
+      if(this.color) {
+        this.style.color = this.color;
+      }
+    },
+
+    ready: function() {
+      this._applyStyles();
     }
   });
 </script>
