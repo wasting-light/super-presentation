@@ -71,7 +71,7 @@
   <template>
     <paper-progress id="progress" value$="[[progress]]"></paper-progress>
 
-    <iron-pages id="pages" selected$="{{currentSlide}}">
+    <iron-pages id="pages" selected$="{{current}}">
       <content></content>
     </iron-pages>
 
@@ -114,18 +114,16 @@
      * Element properties
      */
     properties: {
-      currentSlide: {
+      current: {
         type: Number,
         value: 0,
         notify: true
       },
 
-      numberOfSlides: {
-        type: Number,
+      slides: {
+        type: Array,
         notify: true,
-        value: function() {
-          return Polymer.dom(this).querySelectorAll('super-slide').length;
-        }
+        value: []
       },
 
       progress: {
@@ -142,46 +140,63 @@
     },
 
     /**
-     * Select the next slide
+     * Element event listeners
      */
-    selectNext: function() {
-      var pages = document.querySelector('#pages');
-      pages.selectNext();
+    listeners: {
+      'super-slide-added': 'addSlide',
+      'super-slide-changed': 'changeSlide'
+    },
 
-      if(this.currentSlide + 1 === this.numberOfSlides) {
-        this.currentSlide = 0;
-      } else {
-        this.currentSlide += 1;
+    /**
+     * Add the slides
+     */
+    addSlide: function(event) {
+      this.slides.push(event.target);
+      this.calculateProgress();
+    },
+
+    /**
+     * Change the current slide
+     */
+    changeSlide: function(event) {
+      var direction = event.detail.direction || 'next';
+
+      if(direction === 'next') {
+        this.$.pages.selectNext();
+      }
+
+      if(direction === 'prev') {
+        this.$.pages.selectPrevious();
       }
 
       this.calculateProgress();
+    },
+
+    /**
+     * Select the next slide
+     */
+    selectNext: function() {
+      var currentSlide = this.slides[this.current];
+      currentSlide.fire('super-slide-next');
     },
 
     /**
      * Select the prev slide
      */
     selectPrev: function() {
-      var pages = document.querySelector('#pages');
-      pages.selectPrevious();
-
-      if(this.currentSlide === 0) {
-        this.currentSlide = this.numberOfSlides - 1;
-      } else {
-        this.currentSlide -= 1;
-      }
-
-      this.calculateProgress();
+      var currentSlide = this.slides[this.current];
+      currentSlide.fire('super-slide-prev');
     },
 
     /**
      * Calculate the presentation progress
      */
     calculateProgress: function() {
-      this.progress = (this.currentSlide + 1) / this.numberOfSlides * 100;
+      this.current = this.$.pages.selected;
+      this.progress = (this.current + 1) / this.slides.length * 100;
     },
 
     ready: function() {
-
       this.calculateProgress();
     }
   });

@@ -25,7 +25,7 @@
 
 <body>
   <super-presentation>
-    <super-slide background="#db4437" color="white">
+    <super-slide id="test" background="#db4437" color="white">
       <h1 title>Slide 1</h1>
     </super-slide>
 
@@ -45,5 +45,14 @@
       <h1 title>Slide 5</h1>
     </super-slide>
   </super-presentation>
+
+  <script>
+
+    var slide = document.querySelector('#test');
+
+    slide.addEventListener('super-slide-added', function(e) {
+      console.log('hey');
+    });
+  </script>
 </body>
 </html>
