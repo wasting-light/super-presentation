@@ -10,6 +10,14 @@
       background: white;
     }
 
+    :host ::content [fragment] {
+      opacity: 0;
+    }
+
+    :host ::content [fragment].visible {
+      opacity: 1;
+    }
+
   </style>
 
   <template>
@@ -38,6 +46,18 @@
       color: {
         type: String,
         value: ''
+      },
+
+      fragments: {
+        type: Array,
+        value: function() {
+          return Polymer.dom(this).querySelectorAll('[fragment]');
+        }
+      },
+
+      currentFragment: {
+        type: Number,
+        value: 0
       }
     },
 
@@ -57,6 +77,13 @@
     },
 
     selectNext: function() {
+      if(typeof this.fragments[this.currentFragment] !== 'undefined') {
+        this.fragments[this.currentFragment].classList.add('visible');
+        this.currentFragment++;
+        return;
+      }
+
+      this.currentFragment = 0;
       this.fire('super-slide-changed', {direction: 'next'});
     },
 
