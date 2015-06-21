@@ -1,0 +1,99 @@
+<link rel="import" href="components/polymer/polymer.html">
+<link rel="import" href="components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="super-slide">
+  <style>
+    :host {
+      @apply(--layout-fit);
+      @apply(--layout-vertical);
+      @apply(--layout-center-center);
+      background: white;
+    }
+
+    :host ::content [fragment] {
+      opacity: 0;
+    }
+
+    :host ::content [fragment].visible {
+      opacity: 1;
+    }
+
+  </style>
+
+  <template>
+    <content select="[title]"></content>
+    <content></content>
+    <span>{{slideBackground}}</span>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    /**
+     * Element prototype
+     */
+    is: 'super-slide',
+
+    /**
+     * Element property
+     */
+    properties: {
+      background: {
+        type: String,
+        value: ''
+      },
+
+      color: {
+        type: String,
+        value: ''
+      },
+
+      fragments: {
+        type: Array,
+        value: function() {
+          return Polymer.dom(this).querySelectorAll('[fragment]');
+        }
+      },
+
+      currentFragment: {
+        type: Number,
+        value: 0
+      }
+    },
+
+    applyStyles: function() {
+      if(this.background) {
+        this.style.background = this.background;
+      }
+
+      if(this.color) {
+        this.style.color = this.color;
+      }
+    },
+
+    listeners: {
+      'super-slide-next': 'selectNext',
+      'super-slide-prev': 'selectPrev'
+    },
+
+    selectNext: function() {
+      if(typeof this.fragments[this.currentFragment] !== 'undefined') {
+        this.fragments[this.currentFragment].classList.add('visible');
+        this.currentFragment++;
+        return;
+      }
+
+      this.currentFragment = 0;
+      this.fire('super-slide-changed', {direction: 'next'});
+    },
+
+    selectPrev: function() {
+      this.fire('super-slide-changed', {direction: 'prev'});
+    },
+
+    ready: function() {
+      this.applyStyles();
+      this.fire('super-slide-added');
+    }
+  });
+</script>
